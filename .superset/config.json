@@ -1,0 +1,13 @@
+{
+  "setup": [
+    "swift package resolve",
+    "swift build"
+  ],
+  "teardown": [
+    "true"
+  ],
+  "run": [
+    "swift run VerbatimMac"
+  ]
+}
+

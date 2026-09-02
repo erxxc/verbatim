@@ -1,0 +1,46 @@
+name: Bug report
+description: Report a reproducible problem with Verbatim.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve Verbatim. Do not include private text, credentials, or translation content.
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: macOS 26.x
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: Affected application
+      placeholder: TextEdit, Messages, Terminal, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the observed and expected behavior without sharing sensitive text.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Launch Verbatim
+        2. Select languages…
+    validations:
+      required: true
+  - type: checkboxes
+    id: permissions
+    attributes:
+      label: Permissions checklist
+      options:
+        - label: Accessibility is enabled for the current Verbatim build.
+        - label: Input Monitoring is enabled for the current Verbatim build.
+

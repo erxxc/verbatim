@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Swift release build
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - name: Build
+        run: swift build -c release
+      - name: Validate application property list
+        run: plutil -lint scripts/Info.plist
+      - name: Validate packaging script
+        run: zsh -n scripts/build-macos-app.sh
+

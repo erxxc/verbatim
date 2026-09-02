@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f0e8" />
+    <title>Verbatim — English to Russian, as you write</title>
+    <meta
+      name="description"
+      content="Write naturally in English and see each completed sentence translated into Russian."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#" aria-label="Verbatim home">
+          <span class="brand-mark" aria-hidden="true">В</span>
+          <span>verbatim</span>
+        </a>
+        <div class="nav-actions">
+          <span class="privacy-note"><span class="status-dot"></span>Local-first</span>
+          <button class="language-button" id="languageButton" type="button" aria-label="Change interface language">
+            <span id="interfaceLanguage">EN</span>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+          </button>
+        </div>
+      </nav>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <p class="eyebrow" data-copy="eyebrow">ENGLISH ↔ РУССКИЙ</p>
+          <h1 id="hero-title" data-copy="title">Write your thought.<br /><em>We’ll find the words.</em></h1>
+          <p class="intro" data-copy="intro">
+            Finish a sentence and watch it become Russian—quietly, instantly, without breaking your flow.
+          </p>
+        </section>
+
+        <section class="workspace" aria-label="Translation workspace">
+          <div class="workspace-topbar">
+            <button class="direction-button" id="directionButton" type="button" aria-label="Reverse translation direction">
+              <span class="direction-language"><span class="flag flag-en" id="sourceFlag">EN</span><span id="sourceLanguage">English</span></span>
+              <span class="swap-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 9h14M15 5l4 4-4 4M19 15H5M9 11l-4 4 4 4" /></svg>
+              </span>
+              <span class="direction-language"><span class="flag flag-ru" id="targetFlag">РУ</span><span id="targetLanguage">Russian</span></span>
+            </button>
+            <div class="trigger-label"><kbd>.</kbd><kbd>!</kbd><kbd>?</kbd><span data-copy="trigger">translates</span></div>
+          </div>
+
+          <div class="macro-bar">
+            <div class="macro-copy">
+              <span class="macro-indicator" id="macroIndicator" aria-hidden="true"></span>
+              <div>
+                <strong data-copy="macroTitle">Macro mode</strong>
+                <span id="macroDescription" data-copy="macroDescription">Replace each completed sentence inside the editor</span>
+              </div>
+            </div>
+            <div class="macro-controls">
+              <span class="shortcut"><kbd id="shortcutModifier">⌘</kbd><kbd>⇧</kbd><kbd>M</kbd></span>
+              <button class="macro-toggle" id="macroToggle" type="button" role="switch" aria-checked="true">
+                <span class="toggle-knob"></span><span id="macroToggleLabel">On</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="translation-stream" id="translationStream" aria-live="polite"></div>
+
+          <div class="composer-wrap">
+            <label for="composer" class="sr-only">Write in English</label>
+            <textarea
+              id="composer"
+              rows="3"
+              spellcheck="true"
+              autocomplete="off"
+              placeholder="Start writing in English…"
+              aria-describedby="composerHint"
+            ></textarea>
+            <div class="composer-footer">
+              <div class="composer-hint" id="composerHint">
+                <span class="pulse-ring" aria-hidden="true"></span>
+                <span data-copy="hint">Type a sentence; punctuation will replace it in Russian</span>
+              </div>
+              <div class="composer-actions">
+                <span class="character-count" id="characterCount">0 / 500</span>
+                <button class="clear-button" id="clearButton" type="button" data-copy="clear">Clear</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="details" aria-label="How it works">
+          <article>
+            <span class="detail-number">01</span>
+            <div><h2 data-copy="flowTitle">Keep your flow</h2><p data-copy="flowBody">Press ⌘⇧M from anywhere in the app. Punctuation replaces the completed sentence.</p></div>
+          </article>
+          <article>
+            <span class="detail-number">02</span>
+            <div><h2 data-copy="contextTitle">Built for context</h2><p data-copy="contextBody">Every sentence stays paired with its original, so meaning is easy to follow.</p></div>
+          </article>
+          <article>
+            <span class="detail-number">03</span>
+            <div><h2 data-copy="localTitle">Graceful offline mode</h2><p data-copy="localBody">Common phrases translate on device; richer translation is used when available.</p></div>
+          </article>
+        </section>
+      </main>
+
+      <footer>
+        <span>Verbatim / Вербатим</span>
+        <span data-copy="footer">Made for thoughts that travel.</span>
+      </footer>
+    </div>
+
+    <template id="translationTemplate">
+      <article class="translation-pair">
+        <div class="sentence-side original-side">
+          <span class="sentence-label">EN</span>
+          <p class="original-text"></p>
+        </div>
+        <div class="sentence-divider" aria-hidden="true"><span>В</span></div>
+        <div class="sentence-side russian-side">
+          <span class="sentence-label">РУ</span>
+          <p class="russian-text"></p>
+          <button class="copy-button" type="button" aria-label="Copy Russian translation">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+      </article>
+    </template>
+  </body>
+</html>
